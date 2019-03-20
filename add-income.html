@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Add Expense to Personal Budget</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="style.css" type="text/css"/>
+	<link href="https://fonts.googleapis.com/css?family=Anton|Pacifico&amp;subset=latin-ext" rel="stylesheet">
+</head>
+<body> 
+	<div class="container bg-white text-center col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4 mt-sm-5 p-1 p-sm-3 shadow">
+		<h1>Personal Budget</h1>
+		<p>Take control of your finances</p>
+		<h4>Add details of income</h4>
+		<form>
+			<div class="input-group mb-2">
+				<div class="input-group-prepend w-25">
+					<span class="input-group-text w-100 justify-content-center">Amount</span>
+				</div>
+				<input type="text" class="form-control" placeholder="0.00" required>
+			</div>
+			<div class="input-group mb-2">
+				<div class="input-group-prepend w-25">
+					<span class="input-group-text w-100 justify-content-center">Date</span>
+				</div>
+				<input type="date" class="form-control" required>
+			</div>
+			<div class="input-group mb-2">
+				<div class="input-group-prepend w-25">
+					<span class="input-group-text w-100 justify-content-center">Category</span>
+				</div>
+				<div class="dropdown flex-grow-1"  >
+					<select class="dropdown h-100 w-100" required>
+						<option selected>Salary</option>
+						<option>Bank interest</option>
+						<option>Sales</option>
+						<option>Other</option>
+					</select>
+				</div>
+			</div>
+			<div class="input-group mb-2">
+				<div class="input-group-prepend w-25">
+					<span class="input-group-text w-100 justify-content-center">Comment</span>
+				</div>
+				<textarea class="form-control"></textarea>
+			</div>
+			<div class="w-100 mt-2">
+				<button type="submit" class="btn btn-primary mr-2">Add</button>
+				<button type="button" class="btn btn-primary">Cancel</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
