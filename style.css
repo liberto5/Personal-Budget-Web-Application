@@ -1,8 +1,6 @@
 body
 {
 	background-image: url("img/bg.png");
-	background-size: cover; 
-	-moz-background-size: cover;
 }
 
 h1

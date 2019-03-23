@@ -90,18 +90,23 @@
 				<div class="input-group-prepend w-50">
 					<span class="input-group-text w-100 justify-content-center">Select period of time</span>
 				</div>
-				<select class="w-50" required>
+				<select id="periodsOptions" class="w-50" required>
 					<option selected>Current month</option>
 					<option>Previous month</option>
 					<option>Current year</option>
 					<option>Custom</option>
 				</select>	
 			</div>
-			
-			<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
-				Button, that simulates 'custom' option
-			</button>
-			
+
+			<script>			
+			$("#periodsOptions").on("change", function () {        
+				$modal = $('#myModal');
+				if($(this).val() === 'Custom'){
+					$modal.modal('show');
+				}
+			});
+			</script>
+
 			<div class="modal fade" id="myModal">
 				<div class="modal-dialog">
 					<div class="modal-content">
