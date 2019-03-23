@@ -1,6 +1,6 @@
 body
 {
-	background-image: url("img/bg.jpg");
+	background-image: url("img/bg.png");
 	background-size: cover; 
 	-moz-background-size: cover;
 }
@@ -11,8 +11,21 @@ h1
 	font-size: 40px;
 }
 
-p
+.heading
 {
 	font-family: 'Pacifico', cursive;
 	font-size: 24px;
+}
+
+.border
+{
+	border: 1px solid #000000!important;
+}
+
+#chartIncomesContainer,
+#chartExpensesContainer
+{
+	width: 100%;
+	min-height: 400px;
+	max-height: 450px;
 }
