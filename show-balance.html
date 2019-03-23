@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Balance in Personal Budget</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="style.css" type="text/css"/>
+	<link href="https://fonts.googleapis.com/css?family=Anton|Pacifico&amp;subset=latin-ext" rel="stylesheet">
+	<script>
+	window.onload = function() 
+	{
+		var chart = new CanvasJS.Chart("chartIncomesContainer", 
+			{
+				animationEnabled: true,
+				title: 
+				{
+					text: "Summary of your incomes"
+				},
+				data: [
+				{
+					type: "pie",
+					startAngle: 270,
+					yValueFormatString: "##0.00\"%\"",
+					indexLabel: "{label} {y}",
+					dataPoints: 
+					[
+						{y: 95.56, label: "Salary"},
+						{y: 1.14, label: "Bank interest"},
+						{y: 0.72, label: "Sales"},
+						{y: 2.58, label: "Other"}
+					]
+				}]
+			});
+			
+		chart.render();
+		
+		var chart = new CanvasJS.Chart("chartExpensesContainer", 
+			{
+				animationEnabled: true,
+				title: 
+				{
+					text: "Summary of your expenses"
+				},
+				data: [
+				{
+					type: "pie",
+					startAngle: 270,
+					yValueFormatString: "##0.00\"%\"",
+					indexLabel: "{label} {y}",
+					dataPoints: 
+					[
+						{y: 26.07, label: "Food"},
+						{y: 45.91, label: "Rent"},
+						{y: 3.67, label: "Transport"},
+						{y: 1.38, label: "Phone"},
+						{y: 0.00, label: "Healthcare"},
+						{y: 5.57, label: "Clothes"},
+						{y: 0.84, label: "Hygiene"},
+						{y: 0.00, label: "Children"},
+						{y: 12.71, label: "Entertainment"},
+						{y: 0.00, label: "Trip"},
+						{y: 0.00, label: "Trainings"},
+						{y: 2.57, label: "Books"},
+						{y: 0.00, label: "Savings"},
+						{y: 0.00, label: "Retirement"},
+						{y: 0.00, label: "Debt repayment"},
+						{y: 0.00, label: "Donation"},
+						{y: 1.28, label: "Other"}
+					]
+				}]
+			});
+		chart.render();
+	}
+	</script>
+</head>
+<body> 
+	<div class="container bg-white text-center col-12 col-lg-10 col-xl-8 mt-lg-5 p-1 p-lg-3 shadow">
+		<h1>Personal Budget</h1>
+		<p class="heading">Take control of your finances</p>
+		
+		<fieldset class="border">
+		
+			<legend class="border bg-light"> Your finances </legend>
+			
+			<div class="input-group mb-2 w-75 mx-auto">
+				<div class="input-group-prepend w-50">
+					<span class="input-group-text w-100 justify-content-center">Select period of time</span>
+				</div>
+				<select class="w-50" required>
+					<option selected>Current month</option>
+					<option>Previous month</option>
+					<option>Current year</option>
+					<option>Custom</option>
+				</select>	
+			</div>
+			
+			<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+				Button, that simulates 'custom' option
+			</button>
+			
+			<div class="modal fade" id="myModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form>
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title">Select custom period of time: </h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+						
+							<!-- Modal body -->
+							<div class="modal-body">
+								<div class="input-group mb-2 w-75">
+									<div class="input-group-prepend w-25">
+										<span class="input-group-text w-100 justify-content-center">Start:</span>
+									</div>
+									<input type="date" class="form-control" required>
+								</div>
+								<div class="input-group mb-2 w-75">
+									<div class="input-group-prepend w-25">
+										<span class="input-group-text w-100 justify-content-center">End:</span>
+									</div>
+									<input type="date" class="form-control" required>
+								</div>
+							</div>
+						
+							<!-- Modal footer -->
+							<div class="modal-footer">
+							<input type="submit" class="btn btn-info" value="OK">
+							<button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		
+			<div class="bg-danger py-2 px-4" id="summary">
+				<h5 class="font-weight-bold">Total balance: -85,40 EUR</h5>
+				<h5 class="font-weight-bold">Be careful, you run into debt!</h5>  
+			</div>
+		
+			<fieldset class="border m-3">
+			
+				<legend class="border"> Your incomes </legend>
+			  
+				<div class="d-md-flex justify-content-around">
+					<table class="table table-striped m-2 col-11 col-md-6">
+						<thead>
+							<tr>
+								<th>Category</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Salary</td>
+								<td>2000.00</td>
+							</tr>
+							<tr>
+								<td>Bank interest</td>
+								<td>23.87</td>
+							 </tr>
+							 <tr>
+								<td>Sales</td>
+								<td>14.99</td>
+							</tr>
+							 <tr>
+								<td>Other</td>
+								<td>54.12</td>
+							</tr>
+						<thead>
+							 <tr>
+								<th>Total</th>
+								<th>2092.98</th>
+							</tr>
+						</thead>
+						</tbody>
+					</table>
+									
+					<div id="chartIncomesContainer" class="col-11 col-md-5">
+						<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+					</div>
+				
+				</div>	
+			</fieldset>
+		
+			<fieldset class="border m-3">
+			
+				<legend class="border"> Your expenses </legend>
+			  
+				<div class="d-md-flex justify-content-around">
+					<table class="table table-striped m-2 col-11 col-md-6">
+						<thead>
+							<tr>
+								<th>Category</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Food</td>
+								<td>567.92</td>
+							</tr>
+							<tr>
+								<td>Rent</td>
+								<td>1000.00</td>
+							 </tr>
+							 <tr>
+								<td>Transport</td>
+								<td>80.00</td>
+							</tr>
+							<tr>
+								<td>Phone</td>
+								<td>30.00</td>
+							</tr>
+							<tr>
+								<td>Healthcare</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<td>Clothes</td>
+								<td>121.37</td>
+							</tr>
+							<tr>
+								<td>Hygiene</td>
+								<td>18.28</td>
+							</tr>
+							<tr>
+								<td>Children</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<td>Entertainment</td>
+								<td>276.87</td>
+							</tr>
+							<tr>
+								<td>Trip</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<td>Trainings</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<td>Books</td>
+								<td>56.00</td>
+							</tr>
+							<tr>
+								<td>Savings</td>
+								<td>0.00</td>
+							</tr>
+							 <tr>
+								<td>Retirement</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<td>Debt repayment</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<td>Donation</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<td>Other</td>
+								<td>27.94</td>
+							</tr>
+						<thead>
+							 <tr>
+								<th>Total</th>
+								<th>2178.38</th>
+							</tr>
+						</thead>
+						</tbody>
+					</table>
+									
+					<div id="chartExpensesContainer" class="col-11 col-md-5">
+						<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+					</div>
+				
+				</div>	
+			</fieldset>
+		</fieldset>	
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
