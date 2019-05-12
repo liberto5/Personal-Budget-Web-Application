@@ -23,7 +23,19 @@ h1
 #chartIncomesContainer,
 #chartExpensesContainer
 {
-	width: 100%;
-	min-height: 400px;
-	max-height: 450px;
+	min-width: 300px;
+	max-width: 350px;
+	min-height: 300px;
+	max-height: 350px;
+	padding: 0;
+}
+
+button
+{
+	margin:5px 0;
+}
+
+a:hover
+{
+	text-decoration: none;
 }
