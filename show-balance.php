@@ -146,10 +146,12 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="style.css" type="text/css"/>
 	<link href="https://fonts.googleapis.com/css?family=Anton|Pacifico&amp;subset=latin-ext" rel="stylesheet">
+
 	<script>
 	window.onload = function() 
 	{
-		var chart = new CanvasJS.Chart("chartIncomesContainer", 
+		
+		var chart_with_incomes = new CanvasJS.Chart("chartIncomesContainer", 
 			{
 				animationEnabled: true,
 				title: 
@@ -165,22 +167,21 @@
 					dataPoints: 
 					[
 						<?php
-							$_SESSION['result_incomes']->data_seek(0); 
 							while ($row_with_incomes = $_SESSION['result_incomes']->fetch_assoc())
 							{
 								$amount = $row_with_incomes['SUM(inc.amount)'];
 								$name = $row_with_incomes['name'];
-								$percentage_amount = ($amount / $_SESSION['sum_of_income']) *100;
 								echo "{y: " . $amount . ", label: \" $name \"},";
 							}
+							$_SESSION['result_incomes']->data_seek(0); 
 						?>
 					]
 				}]
 			});
 			
-		chart.render();
+		chart_with_incomes.render();
 		
-		var chart = new CanvasJS.Chart("chartExpensesContainer", 
+		var chart_with_expenses = new CanvasJS.Chart("chartExpensesContainer", 
 			{
 				animationEnabled: true,
 				title: 
@@ -189,6 +190,7 @@
 				},
 				data: [
 				{
+					
 					type: "pie",
 					startAngle: 270,
 					yValueFormatString: "##0.00\"\"",
@@ -196,19 +198,18 @@
 					dataPoints: 
 					[
 						<?php
-							$_SESSION['result_expenses']->data_seek(0); 
 							while ($row_with_expenses = $_SESSION['result_expenses']->fetch_assoc())
 							{
 								$amount = $row_with_expenses['SUM(exp.amount)'];
 								$name = $row_with_expenses['name'];
-								$percentage_amount = ($amount / $_SESSION['sum_of_expense']) *100;
 								echo "{y: " . $amount . ", label: \" $name \"},";
 							}
+							$_SESSION['result_expenses']->data_seek(0); 
 						?>
 					]
 				}]
 			});
-		chart.render();
+		chart_with_expenses.render();
 	}
 	</script>
 </head>
@@ -228,7 +229,7 @@
 					</div>
 					<select id="periodsOptions" name="periodsOptions" class="w-50" onchange="if(this.options[this.selectedIndex].value!='custom'){ this.form.submit(); }">
 						<option value="current_month" <?php 
-										if(!isset($_POST['periodsOptions']) || $_POST['periodsOptions'] == "previous_month")
+										if(!isset($_POST['periodsOptions']) || $_POST['periodsOptions'] == "current_month")
 										{
 											echo 'selected';
 										}
@@ -360,13 +361,14 @@
 						</thead>
 						<tbody>
 							<?php
-								$_SESSION['result_incomes']->data_seek(0);
+								
 								while ($row_with_incomes = $_SESSION['result_incomes']->fetch_assoc())
 								{
 									echo "<tr><td>" . $row_with_incomes['name'] . "</td><td>" . $row_with_incomes['SUM(inc.amount)'] . "</td></tr>";
 									$_SESSION['name']=$row_with_incomes['name'];
 									$_SESSION['amount']=$row_with_incomes['SUM(inc.amount)'];
 								}
+								$_SESSION['result_incomes']->data_seek(0);
 							?>
 						<thead>
 							 <tr>
@@ -381,7 +383,6 @@
 					</table>
 									
 					<?php 
-						
 						if($_SESSION['result_incomes']->num_rows > 0)
 						{
 							echo '<div id="chartIncomesContainer" class="col-11 col-md-7">';
@@ -392,7 +393,7 @@
 						{
 							echo '<span style="color:blue;"><br />You have no incomes in selected period of time</span>';
 						}
-						
+						$_SESSION['result_incomes']->data_seek(0);
 					?>
 				
 				</div>	
@@ -412,30 +413,27 @@
 						</thead>
 						<tbody>
 							<?php
-								$_SESSION['result_expenses']->data_seek(0);
 								while ($row_with_expenses = $_SESSION['result_expenses']->fetch_assoc())
 								{
 									echo "<tr><td>" . $row_with_expenses['name'] . "</td><td>" . $row_with_expenses['SUM(exp.amount)'] . "</td></tr>";
 									$_SESSION['name']=$row_with_expenses['name'];
 									$_SESSION['amount']=$row_with_expenses['SUM(exp.amount)'];
 								}
+								$_SESSION['result_expenses']->data_seek(0);
 							?>
 						<thead>
 							 <tr>
 								<th>Total</th>
 								<?php										
-									$_SESSION['total_expense']->data_seek(0);
-									$row = $_SESSION['total_expense']->fetch_assoc();
-									$_SESSION['sum_of_expense'] = $row['SUM(exp.amount)'];
-									echo "<th>" . $row['SUM(exp.amount)'] . "</th>";
-								?>	
+									$sum_of_expense = $_SESSION['sum_of_expense'];
+									echo "<th>" . $sum_of_expense . "</th>";
+								?>
 							</tr>
 						</thead>
 						</tbody>
 					</table>
 									
-					<?php 
-						
+					<?php
 						if($_SESSION['result_expenses']->num_rows > 0)
 						{
 							echo '<div id="chartExpensesContainer" class="col-11 col-md-7">';
@@ -446,7 +444,7 @@
 						{
 							echo '<span style="color:blue;"><br />You have no expenses in selected period of time</span>';
 						}
-
+						$_SESSION['result_expenses']->data_seek(0);
 					?>	
 				</div>	
 			</fieldset>
